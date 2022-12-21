@@ -35,6 +35,11 @@ public class CustomersController {
         return "register";
     }
     
+    @GetMapping("/home")
+    public String home(){
+        return "home";
+    }
+    
     @GetMapping("/login")
     public String loginForm(HttpSession session){
         if(session.getAttribute("USERNAME") != null) 
@@ -57,7 +62,7 @@ public class CustomersController {
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("USERNAME");
-        return "redirect:/login";
+        return "redirect:/home";
     }
     
     @PostMapping("/customer/checkRegister")

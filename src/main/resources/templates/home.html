@@ -12,14 +12,14 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     </head>
     <body>
-            <body>
+    <body>
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="./index.php?action=index">Market online</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="container-fluid row collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -30,18 +30,22 @@
                             <li class="nav-item">
                                 <a class="nav-link " href="?action=cart">Cart</a>
                             </li>
-                            
-                               <li class="nav-item">
+
+                            <li class="nav-item">
                                 <a class="nav-link " href="?action=history">History</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">Logout</a>
                             </li>
-                            <!--<button type="button" class="btn btn-info"></button>--> 
-                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="?action=login">Login</a>
-                            </li>
+
+
+                            <div th:switch="${session.USERNAME}"> 
+                                <li th:case="null" class="nav-item">
+                                    <a class="nav-link" href="/login">Login</a>
+                                </li>
+                                <button th:case="*" type="button" class="btn btn-info" th:text="${session.USERNAME}"></button>
+                            </div>
+
                         </ul>
                     </div>
                 </div>
