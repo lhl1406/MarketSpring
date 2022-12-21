@@ -2,7 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>List customers</title>
+        <title>List Customers</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -12,25 +12,25 @@
     </head>
     <body class="container">
         
-        <div>List Customers</div>
+        <div style="text-align: center; font-size: 36px; font-weight: bolder; margin: 1%" >LIST CUSTOMERS</div>
         <table border="1" class="table">
             <tr>
-               <th>ID</th>
-               <th>Name</th>
-               <th>City</th>
-               <th>Address</th>
-               <th>Price</th>
-               <th>Edit</th>
+               <th style="background-color: yellowgreen">ID</th>
+               <th style="background-color: yellowgreen">Full Name</th>
+               <th style="background-color: yellowgreen">Password</th>
+               <th style="background-color: yellowgreen">City</th>
+               <th style="background-color: yellowgreen">Address</th>
+               <th style="background-color: yellowgreen">Edit</th>
             </tr>
             <tr th:each ="row, state: ${data}">
-               <td th:utext="${state.count}">...</td>
                <td th:utext="${row.CustomerID}">...</td>
                <td th:utext="${row.Fullname}">...</td>
-               <td th:utext="${row.Address}">...</td>
+               <td th:utext="${row.Password}">...</td>
                <td th:utext="${row.City}">...</td>
-               <td><a th:href="'/customer/edit/'+ ${row.CustomerID}">Edit</a></th>
+               <td th:utext="${row.Address}">...</td>
+               <td style="margin-left: 3%"><a th:href="'/customer/edit/'+ ${row.CustomerID}"><button type="button" class="btn btn-warning">Update</button></a></th>
             </tr>
          </table>
-        <p><a href="/customer/add">Add customer</p>
+        <a href="/customer/add"><button type="button" class="btn btn-success">Add customer</button></a>
     </body>
 </html>

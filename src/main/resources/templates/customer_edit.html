@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>TODO supply a title</title>
+        <title>Market Spring Boot</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -15,34 +10,40 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body class="container">
         
-        <div>Customer - Edit</div>
-        <form th:action="@{/customer/update}" th:object="${customer}" method="POST">
-            <div class="row">
-                
-                <label></label><input type="text" th:field="*{CustomerID}" class="form-control"/>
-            
+        <div style="text-align: center; font-size: 36px; font-weight: bolder; margin: 1%">UPDATE CUSTOMER</div>
+        <form th:action="@{/customer/update}" th:object="${customer}" method="POST" onsubmit="message()" 
+              style="border: outset; width: 50%; margin-left: 26%">
+            <div class="row" style="width: 95%; margin: 2%">              
+                <label style="font-weight:bold">ID</label>
+                <input type="text" th:field="*{CustomerID}" class="form-control" readonly="true"/>       
             </div>
-            <div class="row">
-                
-                <label>Full name</label><input type="text" th:field="*{Fullname}" class="form-control"/>
             
+            <div class="row" style="width: 95%; margin: 2%">
+                <label style="font-weight:bold">Full name</label>
+                <input type="text" th:field="*{Fullname}" class="form-control"/>
             </div>
-            <div class="row">
-                
-                <label>Password</label><input type="password" th:field="*{Password}" class="form-control"/>
             
+            <div class="row" style="width: 95%; margin: 2%">             
+                <label style="font-weight:bold">Password</label>
+                <input type="password" th:field="*{Password}" class="form-control"/>          
             </div>
-            <div class="row">
-                
-                <label>City</label><input type="text" th:field="*{City}" class="form-control"/>
             
-            </div><!-- comment -->
-            <div class="row">
-                
-                <label>Address</label><input type="text" th:field="*{Address}" class="form-control"/>
-            
+            <div class="row" style="width: 95%; margin: 2%">               
+                <label style="font-weight:bold">City</label>
+                <input type="text" th:field="*{City}" class="form-control"/>         
             </div>
-            <input type="submit" value="Update" class="btn btn-primary"/>
+            
+            <div class="row" style="width: 95%; margin: 2%">
+                <label style="font-weight:bold">Address</label>
+                <input type="text" th:field="*{Address}" class="form-control"/>
+            </div>
+            
+            <input style="margin: 1%; margin-left: 80%" type="submit" value="Update" class="btn btn-warning"/>
         </form>
     </body>
+    <script>
+        function message() {
+            alert("Update Success!");
+        }
+    </script>
 </html>
