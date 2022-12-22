@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 public interface CustomerService {
     Iterable<Customers> findAll();
     
-    //Customers update(int id, Customers cusID);
+    Customers update(int id, Customers cusID);
+    
     Optional<Customers> findById(int id);
     
 }

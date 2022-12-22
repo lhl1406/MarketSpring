@@ -27,18 +27,18 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     
-//    @Override
-//    public Customers update(int id,Customers cus) {
-//        Customers c = findById(cus.getCustomerID()).orElse(null);
-//        //Optional<Customers> customer = findById(cus.getCustomerID());
-//        //Customers c = customer.get();     
-//        if (StringUtils.isEmpty(cus.getPassword())) {
-//            c.setPassword(c.getPassword());
-//        } else {
-//            c.setPassword(cus.getPassword());
-//        }
-//        return Repository.save(c);
-//    }
+    @Override
+    public Customers update(int id,Customers cus) {
+        //Customers c = findById(cus.getCustomerID()).orElse(null);
+        Optional<Customers> customer = findById(cus.getCustomerID());
+        Customers c = customer.get();     
+        if (StringUtils.isEmpty(cus.getPassword())) {
+            c.setPassword(c.getPassword());
+        } else {
+            c.setPassword(cus.getPassword());
+        }
+        return Repository.save(c);
+    }
 
     @Override
     public Optional<Customers> findById(int id) {
