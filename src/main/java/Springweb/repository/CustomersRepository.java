@@ -14,10 +14,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomersRepository  extends CrudRepository<Customers, Integer>{ 
 
-    public Customers findbyName(String name, String password);
+//    public Customers findbyName(String name, String password);
     
-//    @Query("Select c from Customers c Where c.Fullname = ?1 and c.Password = ?2")
-//    Customers findbyName(String name , String password);
+    @Query("Select c from Customers c Where c.Fullname = ?1 and c.Password = ?2")
+    Customers findbyName(String name , String password);
     
     @Query("Select c from Customers c Where c.Fullname = ?1")
     Customers existCus(String name);

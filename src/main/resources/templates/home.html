@@ -17,34 +17,32 @@
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="./index.php?action=index">Market online</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <form class="col-6" action="/home/searchByKeyWords" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="keyWords" th:value="${keyWords}" class="form-control" placeholder="Search for name, prices" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-secondary" type="submit"> Search</button>
+                            </div>
+                          </div>
+                    </form>
                     <div class="container-fluid row collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul class=" justify-content-end navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="?action=vegetable">Vegetable</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="?action=cart">Cart</a>
+                                <a class="nav-link " href="/cart">Cart</a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link " href="?action=history">History</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="?action=logout">Logout</a>
-                            </li>
-                            <button type="button" class="btn btn-info"></button> 
-                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="?action=login">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="?action=customer">Account</a>
-                            </li>
                                 <a class="nav-link" href="/logout">Logout</a>
                             </li>
 
@@ -61,5 +59,69 @@
                 </div>
             </nav>
         </div>
+        
+        <div class="container ">
+            <div class="row my-4 justify-content-end">
+                <form action="/home/selling" class="col-4">
+                    <div class="col-12 input-group mb-3">
+                        <select class="custom-select" name="topSell" id="inputGroupSelect02">
+                          <!-- <option selected>Selling</option> -->
+                          <option th:selected="${topSell == 5}"  value="5">Top 5 Selling</option>
+                          <option th:selected="${topSell ==10}"  value="10">Top 10 Selling</option>
+                          <option th:selected="${topSell ==100}"  value="100">Top 100 Selling</option>
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">Filter</button>
+                        </div>
+                      </div>
+                </form>
+                <form action="/home/filterByPrices" class="col-4">
+                  <div class="col-12 input-group mb-3">
+                        <select name="searchPrice" class="custom-select" id="inputGroupSelect02">
+                            <option  th:selected="${searchPrice =='des'}" value="des">High to low</option>
+                            <option th:selected="${searchPrice =='inc'}" value="inc">Low to high </option>
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">Filter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="row gx-1">
+             
+                <div class="col-sm-3 col-12 gy-4">
+                    Category name:
+                    <form action="/home/filterByCategory">
+                        <div class="form-check" th:each ="row, state: ${categories}">
+                            <input class="form-check-input" type="checkbox"  th:name ="idCate+${row.CategoryID}" th:value="${row.CategoryID}" th:checked="${#lists.contains(keys,'idCate'+{row.CategoryID})}">
+                            <label class="form-check-label" for="spices" th:utext="${row.Name}">
+                            </label>
+                        </div>
+                        <!-- name="action" value="filter" -->
+                        <button type="submit"  class="btn btn-info">Filter</button>
+                    </form>
+                </div>
+                <div class="col-sm-12 col-lg-9 col-12 row  gy-3 gx-2 d-flex justify-content-start" >
+                    <div class="col-12 col-md-6 col-sm-6 col-lg-4" th:each ="row, state: ${vegetables} ">
+                        <div class="card" style="width: 16.5rem;">
+                            <img class="card-img-top img-thumbnail" style="height: 286px; width:286px "  th:src="${row.Image}"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="card-title " th:utext="${row.Vegetable_Name} "></h5>
+                                    <p class="card-text rounded py-1 bg-warning text-white" th:utext="${row.Price}+ ' VNĐ'"></p>
+                                </div>
+                                <form action="../vegetable/index.php">
+                                <input type="text" hidden name="VegetableID" value="">
+                                <button type="submit" name="action" value="cart" class="btn btn-primary">Buy</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

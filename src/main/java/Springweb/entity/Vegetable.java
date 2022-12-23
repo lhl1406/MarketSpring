@@ -1,14 +1,18 @@
 
 package Springweb.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name ="Vegetable")
 
-public class Vegetable {
+public class Vegetable implements Comparable<Vegetable> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int VegetableID;
@@ -84,4 +88,16 @@ public class Vegetable {
         this.Price = Price;
     }
     
+    public String getALL() {
+        return (Price+" "+ Vegetable_Name+" ");
+    }
+    @Override
+    public int compareTo(Vegetable v) {
+	
+		float comparePrice = ((Vegetable) v).getPrice(); 
+		//ascending order
+		return (int) (this.Price - comparePrice);
+		
+		
+	}
 }

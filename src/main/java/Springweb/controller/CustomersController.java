@@ -1,10 +1,14 @@
 package Springweb.controller;
 
 import Springweb.entity.Customers;
+import Springweb.entity.Vegetable;
+import Springweb.entity.Category;
 import Springweb.repository.CustomersRepository;
+import Springweb.repository.VegetableRepository;
+import Springweb.repository.CategoryRepository;
 import Springweb.service.CustomerService;
+import jakarta.servlet.http.HttpSession;
 import java.util.Optional;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +31,7 @@ public class CustomersController {
     private CustomerService customerService;
     @Autowired
     private CustomersRepository customersReposity;
-
+   
     @GetMapping("/register")
     public String registerForm(HttpSession session) {
         if(session.getAttribute("USERNAME") != null) 
@@ -35,10 +39,6 @@ public class CustomersController {
         return "register";
     }
     
-    @GetMapping("/home")
-    public String home(){
-        return "home";
-    }
     
     @GetMapping("/login")
     public String loginForm(HttpSession session){
@@ -96,7 +96,8 @@ public class CustomersController {
             return "login";
         }
         session.setAttribute("USERNAME", username);
-        return "home";
+        return "redirect:/home";
+//        return "home";
     }
     
     @GetMapping("/logout")
