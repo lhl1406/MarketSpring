@@ -2,7 +2,9 @@ package Springweb.controller;
 
 import Springweb.entity.Customers;
 import Springweb.repository.CustomersRepository;
+import Springweb.service.CustomerService;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,33 +12,39 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class CustomersController {
-   
+
+    @Autowired
+    private CustomerService customerService;
     @Autowired
     private CustomersRepository customersReposity;
-    
-    @GetMapping("/customer/add")
-    public String register(Model m)
-    {
-        Customers cus = new Customers();
-        m.addAttribute("customer", cus);
-        return "customer_register";
-        
+
+    @GetMapping("/register")
+    public String registerForm(HttpSession session) {
+        if(session.getAttribute("USERNAME") != null) 
+            return "home";
+        return "register";
     }
-    @PostMapping("/customer/save")
-    public String save(Model model, @ModelAttribute("customer") Customers customer)
-    {
-        
-        customersReposity.save(customer);
-        
-        return "redirect:/customer/all";
-        
+    
+    @GetMapping("/home")
+    public String home(){
+        return "home";
+    }
+    
+    @GetMapping("/login")
+    public String loginForm(HttpSession session){
+        if(session.getAttribute("USERNAME") != null) 
+            return "home";
+        return "login";
     }
     @PostMapping("/customer/update")
     public String update(Model model, @ModelAttribute("customer") Customers customer)
@@ -78,4 +86,33 @@ public class CustomersController {
     }  
     
     //
+
+    @PostMapping("/customer/checklogin")
+    public String checklogin(Model model, @RequestParam("taikhoan") String username, 
+            @RequestParam("pass") String password, HttpSession session) {
+        boolean check = customerService.checkLogin(username, password);
+        if (check == false) {
+            model.addAttribute("ERROR", "Username or Password is wrong");
+            return "login";
+        }
+        session.setAttribute("USERNAME", username);
+        return "home";
+    }
+    
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("USERNAME");
+        return "redirect:/home";
+    }
+    
+    @PostMapping("/customer/checkRegister")
+    public String checkRegister(Model model, @ModelAttribute("customer") Customers customer,HttpSession session){
+        boolean check = customerService.checkRegister(customer);
+        if(check == false){
+            model.addAttribute("ERROR", "Username has exist");
+            return "register";
+        }
+        session.setAttribute("USERNAME", customer.getFullname());
+        return "home";
+    }   
 }
