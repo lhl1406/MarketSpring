@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Springweb.controller;
 
 import Springweb.entity.Customers;
@@ -14,11 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- *
- * @author caothanh
- */
+
 @Controller
 public class CustomersController {
    
@@ -48,6 +44,8 @@ public class CustomersController {
         Optional<Customers> cus = customersReposity.findById(customer.getCustomerID());
         Customers c;
         c = cus.get();
+        //c.setCustomerID(customer.getCustomerID());
+        c.setPassword(customer.getPassword());
         c.setAddress(customer.getAddress());
         c.setCity(customer.getCity());
         c.setFullname(customer.getFullname());
@@ -56,6 +54,7 @@ public class CustomersController {
         return "redirect:/customer/all";
         
     }
+    
     @GetMapping("/customer/all")
     public String showAllCustomer(Model m)
     {
@@ -71,4 +70,12 @@ public class CustomersController {
         //model.addAttribute("customer", cus);
         return "customer_edit";
     }
+    @RequestMapping("/customer/delete/{id}")
+    public String CusDelete(@PathVariable int id, Model model) {
+        customersReposity.deleteById(id);
+        model.addAttribute("listCustomer", customersReposity.findAll());
+        return "redirect:/customer/all";
+    }  
+    
+    //
 }

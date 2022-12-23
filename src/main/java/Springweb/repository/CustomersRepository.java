@@ -5,10 +5,11 @@
 package Springweb.repository;
 
 import Springweb.entity.Customers;
+import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CustomersRepository  extends CrudRepository<Customers, Integer>{
-    
+public interface CustomersRepository  extends CrudRepository<Customers, Integer>{ 
 }
+
