@@ -4,69 +4,66 @@
  */
 package Springweb.entity;
 
-import java.io.Serializable;
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  *
- * @author VIVOBOOK
+ * @author HP
  */
-@Data
 @Entity
-@Table (name = "orderdetail")
-@AssociationOverrides({
-    @AssociationOverride (name = "primaryKey.order",
-            joinColumns = @JoinColumn(name="OrderID")),
-    @AssociationOverride (name = "primaryKey.vegetable",
-            joinColumns = @JoinColumn(name="VegetableID"))
-})
-public class OrderDetail implements Serializable {
-    
+@Table(name ="Orderdetail")
+public class Orderdetail {
     @Id
-    private OrderDetailID primaryKey = new OrderDetailID();
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int OrderDetailID;
     
-    public OrderDetailID getPrimaryKey() {
-        return primaryKey;
-    }
-    
-     public void setPrimaryKey(OrderDetailID primaryKey) {
-        this.primaryKey = primaryKey;
-    }
- 
-    @Transient
-    public Order getOrder() {
-        return getPrimaryKey().getOrder();
-    }
- 
-    public void setOrder(Order order) {
-        getPrimaryKey().setOrder(order);
-    }
- 
-    @Transient
-    public Vegetable getVegetable() {
-        return getPrimaryKey().getVegetable();
-    }
- 
-    public void setVegetable(Vegetable vegetable) {
-        getPrimaryKey().setVegetable(vegetable);
-    }
- 
-    @Column(name = "Quantity")
+    private int OrderID;
+    private int VegetableID;
     private int Quantity;
-    
-    @Column(name = "Price")
     private float Price;
 
+    public int getOrderDetailID() {
+        return OrderDetailID;
+    }
+
+    public void setOrderDetailID(int OrderDetailID) {
+        this.OrderDetailID = OrderDetailID;
+    }
+
+    public int getOrderID() {
+        return OrderID;
+    }
+
+    public void setOrderID(int OrderID) {
+        this.OrderID = OrderID;
+    }
+
+    public int getVegetableID() {
+        return VegetableID;
+    }
+
+    public void setVegetableID(int VegetableID) {
+        this.VegetableID = VegetableID;
+    }
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int Quantity) {
+        this.Quantity = Quantity;
+    }
+
+    public float getPrice() {
+        return Price;
+    }
+
+    public void setPrice(float Price) {
+        this.Price = Price;
+    }
+    
 }

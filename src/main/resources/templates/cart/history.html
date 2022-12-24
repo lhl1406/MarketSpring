@@ -58,42 +58,37 @@
             </nav>
         </div>
         
-        <div class="container">
+        <div class="container my-5">
             <!-- order -->
-            <form action="/cart/saveOrder" onsubmit="message()">
+            <form action="/cart/saveOrder">
                 <table class="table table-sm">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Amout</th>
-                        <th scope="col">Price</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">View</th>
                       </tr>
                     </thead>
                     <tbody>
     
-                        <tr th:each ="row, state: ${carts} ">
+                        <tr th:each ="row, state: ${cartHistory} ">
                         <th scope="row" th:utext="${state.index}+1"></th>
-                        <td th:utext="${row.Vegetable_Name}">tomato</td>
-                        <td th:utext="${row.Amount}"></td>
-                        <td th:utext="${row.Price}"></td>
-                      </tr>
-                      <tr>
-                        <td colspan="3">Total:</td>
-                        <td class="text-danger font-weight-bold" th:utext="${total} ">VNĐ</td>
-                      </tr>
+                        <td th:utext="${row.Date}"></td>
+                        <td th:utext="${row.Note}"></td>
+                        <td th:utext="${row.Total }+' VNĐ'"></td>
+                        <td ><form action="/view">
+                            <input type="text" hidden name="OrderID" th:value="${row.OrderID}">
+                            <button class="btn btn-primary" type="submit">View</button>
+                        </form></td>
+                        </tr>
                     </tbody>
                   </table>
-                <input type="text" name="" value="" hidden>
-                    <button name="action1" class="btn btn-danger" value="add_order">Order</button>
             </form>
         </div>
         
     </body>
 </html>
 <script>
-       
-    function message() {
-        alert("Buy success");
-    }
 </script>

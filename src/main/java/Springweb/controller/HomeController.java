@@ -51,6 +51,7 @@ public class HomeController {
                     if (session.getAttribute("topSell") != null) {
                         m.addAttribute("topSell", session.getAttribute("topSell"));
                     }
+                    
                 } else {
                     m.addAttribute("keys", "all");
                     m.addAttribute("keyWords", "");
@@ -62,6 +63,7 @@ public class HomeController {
 
             }
         }
+        
         return "home";
     }
 

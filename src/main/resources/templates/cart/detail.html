@@ -67,25 +67,23 @@
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Amout</th>
-                        <th scope="col">Price</th>
+                        <!-- <th scope="col">Price</th> -->
                       </tr>
                     </thead>
                     <tbody>
     
-                        <tr th:each ="row, state: ${carts} ">
+                        <tr th:each ="row, state: ${views} ">
                         <th scope="row" th:utext="${state.index}+1"></th>
                         <td th:utext="${row.Vegetable_Name}">tomato</td>
                         <td th:utext="${row.Amount}"></td>
-                        <td th:utext="${row.Price}"></td>
+                        <td th:utext="${row.Price} +' VNĐ'"></td>
                       </tr>
-                      <tr>
+                      <!-- <tr>
                         <td colspan="3">Total:</td>
                         <td class="text-danger font-weight-bold" th:utext="${total} ">VNĐ</td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
-                <input type="text" name="" value="" hidden>
-                    <button name="action1" class="btn btn-danger" value="add_order">Order</button>
             </form>
         </div>
         

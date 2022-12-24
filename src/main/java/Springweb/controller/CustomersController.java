@@ -95,7 +95,9 @@ public class CustomersController {
             model.addAttribute("ERROR", "Username or Password is wrong");
             return "login";
         }
+        Customers c = customersReposity.findbyName(username, password);
         session.setAttribute("USERNAME", username);
+        session.setAttribute("info", c);
         return "redirect:/home";
 //        return "home";
     }

@@ -16,7 +16,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="./index.php?action=index">Market online</a>
+                    <a class="navbar-brand" href="/home">Market online</a>
                     <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -33,14 +33,14 @@
                     <div class="container-fluid row collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul class=" justify-content-end navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="?action=vegetable">Vegetable</a>
+                                <a class="nav-link" aria-current="page" href="/home">Vegetable</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="/cart">Cart</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link " href="?action=history">History</a>
+                                <a class="nav-link " href="/history">History</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">Logout</a>
@@ -61,6 +61,7 @@
         </div>
         
         <div class="container ">
+           
             <div class="row my-4 justify-content-end">
                 <form action="/home/selling" class="col-4">
                     <div class="col-12 input-group mb-3">
@@ -112,9 +113,9 @@
                                     <h5 class="card-title " th:utext="${row.Vegetable_Name} "></h5>
                                     <p class="card-text rounded py-1 bg-warning text-white" th:utext="${row.Price}+ ' VNĐ'"></p>
                                 </div>
-                                <form action="../vegetable/index.php">
-                                <input type="text" hidden name="VegetableID" value="">
-                                <button type="submit" name="action" value="cart" class="btn btn-primary">Buy</button>
+                                <form action="cart/add" onsubmit="message()">
+                                <input type="text" hidden name="VegetableID" th:value="${row.VegetableID}">
+                                <button type="submit" class="btn btn-primary" >Buy</button>
                                 </form>
                             </div>
                         </div>
@@ -124,4 +125,11 @@
         </div>
 
     </body>
+
 </html>
+ <script>
+       
+        function message() {
+            alert("Add item cart success");
+        }
+    </script>
