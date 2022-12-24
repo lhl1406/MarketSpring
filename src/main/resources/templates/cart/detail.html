@@ -66,6 +66,7 @@
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
+                         <th scope="col">Image</th>
                         <th scope="col">Amout</th>
                         <th scope="col">Price</th>
                       </tr>
@@ -75,6 +76,7 @@
                         <tr th:each ="row, state: ${views} ">
                         <th scope="row" th:utext="${state.index}+1"></th>
                         <td th:utext="${row.Vegetable_Name}">tomato</td>
+                        <td > <img  style="height: 50px; width: 50px " th:src="${row.Image}" alt="alt"/> </td>
                         <td th:utext="${row.Amount}"></td>
                         <td th:utext="${row.Price} +' VNĐ'"></td>
                       </tr>
