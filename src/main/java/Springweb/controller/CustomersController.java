@@ -3,11 +3,14 @@ package Springweb.controller;
 import Springweb.entity.Customers;
 import Springweb.entity.Vegetable;
 import Springweb.entity.Category;
+import Springweb.entity.Order;
 import Springweb.repository.CustomersRepository;
 import Springweb.repository.VegetableRepository;
 import Springweb.repository.CategoryRepository;
+import Springweb.repository.OrderRepository;
 import Springweb.service.CustomerService;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,8 @@ public class CustomersController {
     private CustomerService customerService;
     @Autowired
     private CustomersRepository customersReposity;
+    @Autowired
+    private OrderRepository orderRepository;
    
     @GetMapping("/register")
     public String registerForm(HttpSession session) {
@@ -53,7 +58,11 @@ public class CustomersController {
         Customers c;
         c = cus.get();
         //c.setCustomerID(customer.getCustomerID());
-        c.setPassword(customer.getPassword());
+        if(customer.getPassword().equalsIgnoreCase("")) {
+           c.setPassword(c.getPassword());
+        } else {
+            c.setPassword(customer.getPassword());
+        }
         c.setAddress(customer.getAddress());
         c.setCity(customer.getCity());
         c.setFullname(customer.getFullname());
@@ -80,6 +89,11 @@ public class CustomersController {
     }
     @RequestMapping("/customer/delete/{id}")
     public String CusDelete(@PathVariable int id, Model model) {
+         ArrayList<Order> list = (ArrayList<Order>) orderRepository.CheckForeignKey(id);
+        if(!list.isEmpty()) {
+            model.addAttribute("flag", "Exit in orther table");
+            return "redirect:/customer/all";
+        }
         customersReposity.deleteById(id);
         model.addAttribute("listCustomer", customersReposity.findAll());
         return "redirect:/customer/all";

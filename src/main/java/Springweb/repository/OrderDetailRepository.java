@@ -15,4 +15,7 @@ public interface OrderDetailRepository extends CrudRepository<Orderdetail, Integ
    
     @Query("Select o from Orderdetail o Where o.OrderID = ?1")
     public Iterable<Orderdetail> findByOrderID(int OrderID);
+    
+    @Query("Select o from Orderdetail o Where o.VegetableID = ?1")
+    public Iterable<Orderdetail> CheckForeignKey(int VegetableID);
 }

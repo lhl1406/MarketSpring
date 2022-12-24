@@ -34,11 +34,11 @@
             
             <div class="row" style="width: 90%; margin: 5%">
                 <label>Category ID</label>
-                <select class="form-control">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
+                <select class="form-control" th:field="*{CategoryID}">
+                    <th:block th:each="row : ${category}">
+                        <option  th:value="${row.CategoryID}" th:text="${row.Name}"></option>
+                    </th:block>
+                 
                 </select>
             </div>
             

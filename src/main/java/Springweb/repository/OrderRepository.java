@@ -15,5 +15,6 @@ public interface OrderRepository extends CrudRepository<Order, Integer>{
 
     @Query("Select c from Order c Where c.CustomerID = ?1")
     public Iterable<Order> findByCustomerID(int ID);
-    
+    @Query("Select o from Order o Where o.CustomerID = ?1")
+    public Iterable<Order> CheckForeignKey(int CustomerID);
 }

@@ -1,8 +1,11 @@
 package Springweb.controller;
 
 import Springweb.entity.Category;
+import Springweb.entity.Vegetable;
 
 import Springweb.repository.CategoryRepository;
+import Springweb.repository.VegetableRepository;
+import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,8 @@ public class CategoryController {
 
     @Autowired
     CategoryRepository categoryRepository;
+    @Autowired
+    VegetableRepository vegatableRepository;
     @GetMapping("admin/categories")
     public String showAllCategories(Model m) {
         Iterable<Category> list = categoryRepository.findAll();
@@ -64,6 +69,11 @@ public class CategoryController {
     }
     @GetMapping(value = {"admin/categories/delete/{id}"})
     public String delete(@PathVariable("id") int id, Model model){
+         ArrayList<Vegetable> list = (ArrayList<Vegetable>) vegatableRepository.CheckForeignKey(id);
+        if(!list.isEmpty()) {
+            model.addAttribute("flag", "Exit in orther table");
+            return "redirect:/admin/categories";
+        }
         categoryRepository.deleteById(id);
         model.addAttribute("category", categoryRepository.findAll());
         return "redirect:/admin/categories";

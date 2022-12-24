@@ -41,7 +41,7 @@
             <tr>
                <th style="background-color: yellowgreen">ID</th>
                <th style="background-color: yellowgreen">Full Name</th>
-               <th style="background-color: yellowgreen">Password</th>
+               <!--<th style="background-color: yellowgreen">Password</th>-->
                <th style="background-color: yellowgreen">City</th>
                <th style="background-color: yellowgreen">Address</th>
                <th style="background-color: yellowgreen">Edit</th>
@@ -49,7 +49,7 @@
             <tr th:each ="row, state: ${data}">
                <td th:utext="${row.CustomerID}">...</td>
                <td th:utext="${row.Fullname}">...</td>
-               <td th:utext="${row.Password}">...</td>
+               <!--<td th:utext="${row.Password}">...</td>-->
                <td th:utext="${row.City}">...</td>
                <td th:utext="${row.Address}">...</td>
                <td style="margin-left: 3%">
